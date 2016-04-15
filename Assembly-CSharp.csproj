@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{0F0B8DBD-578A-7F0B-E918-3BCA0F88A117}</ProjectGuid>
+    <ProjectGuid>{B38E905D-CA49-764D-78F4-97FEDFE5FFC0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -48,6 +48,10 @@
      <Compile Include="Assets\_Scripts\GameController.cs" />
      <Compile Include="Assets\_Scripts\HeroController.cs" />
      <Compile Include="Assets\_Scripts\InstructionsController.cs" />
+     <Compile Include="Assets\_Scripts\LevelThree\EnemyControllerLvlThree.cs" />
+     <Compile Include="Assets\_Scripts\LevelThree\FireControllerLvlThree.cs" />
+     <Compile Include="Assets\_Scripts\LevelThree\PlatformFall.cs" />
+     <Compile Include="Assets\_Scripts\LevelThree\ShootingControllerLvlThree.cs" />
      <Compile Include="Assets\_Scripts\LevelTwo\EnemyControllerLvlTwo.cs" />
      <Compile Include="Assets\_Scripts\LevelTwo\FallingPlatformController.cs" />
      <Compile Include="Assets\_Scripts\LevelTwo\FireController.cs" />

@@ -81,7 +81,8 @@ public class HeroController : MonoBehaviour {
 		this._enemyDeath = this._audioSources [3];
         this._powerUpSound = this._audioSources[4];
 		this.getPosition ();
-        if (SceneManager.GetActiveScene().buildIndex == 3) {
+        if (SceneManager.GetActiveScene().buildIndex == 3 || SceneManager.GetActiveScene().buildIndex == 4)
+        {
 
         }
         else
@@ -96,6 +97,11 @@ public class HeroController : MonoBehaviour {
         if (SceneManager.GetActiveScene().buildIndex == 3)
         {
             Vector3 currentPosition = new Vector3(this._transform.position.x, this._transform.position.y, -1f);
+            this.cameraObject.position = currentPosition;
+        }
+        else if (SceneManager.GetActiveScene().buildIndex == 4)
+        {
+            Vector3 currentPosition = new Vector3(this._transform.position.x-70f, this._transform.position.y, -1f);
             this.cameraObject.position = currentPosition;
         }
         else
@@ -223,6 +229,13 @@ public class HeroController : MonoBehaviour {
             this._powerUpSound.Play();
             this.firingEnabled = true;
         }
+
+        if (other.gameObject.CompareTag("icepowerup"))
+        {
+            this._powerUpSound.Play();
+            this.firingEnabled = true;
+        }
+
      
 
 		//when the player reaches the final door
