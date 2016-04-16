@@ -39,6 +39,9 @@ public class HeroController : MonoBehaviour {
 	private AudioSource _deathSound;
 	private AudioSource _enemyDeath;
     private AudioSource _powerUpSound;
+    private AudioSource _gameLastSceneSound;
+    private AudioSource _gameSuspenseSound;
+    private bool startSound = false;
 
 	//PUBLIC INSTANCE VARIABLES
 	public VelocityRange velocityRange;
@@ -80,14 +83,21 @@ public class HeroController : MonoBehaviour {
 		this._deathSound = this._audioSources [2];
 		this._enemyDeath = this._audioSources [3];
         this._powerUpSound = this._audioSources[4];
+
+        if (SceneManager.GetActiveScene().buildIndex == 4)
+        {
+            this._gameLastSceneSound = this._audioSources[5];
+            this._gameSuspenseSound = this._audioSources[6];
+        }
+       
 		this.getPosition ();
         if (SceneManager.GetActiveScene().buildIndex == 3 || SceneManager.GetActiveScene().buildIndex == 4)
         {
-
+            
         }
         else
         {
-            this._spawn(-374f, 550f, 0f);
+            //this._spawn(-374f, 550f, 0f);
         }
 		
 	}
@@ -96,13 +106,29 @@ public class HeroController : MonoBehaviour {
 
         if (SceneManager.GetActiveScene().buildIndex == 3)
         {
+
             Vector3 currentPosition = new Vector3(this._transform.position.x, this._transform.position.y, -1f);
             this.cameraObject.position = currentPosition;
         }
         else if (SceneManager.GetActiveScene().buildIndex == 4)
         {
-            Vector3 currentPosition = new Vector3(this._transform.position.x-70f, this._transform.position.y, -1f);
-            this.cameraObject.position = currentPosition;
+            if (this._transform.position.x > 6050f)
+            {
+                Vector3 currentPosition = new Vector3(this._transform.position.x + 150f, this._transform.position.y, -1f);
+                this.cameraObject.position = currentPosition;
+                
+                if (!startSound)
+                {
+                    this._gameLastSceneSound.Stop();
+                    this._gameSuspenseSound.Play();
+                    startSound = true;
+                }
+            }
+            else
+            {
+                Vector3 currentPosition = new Vector3(this._transform.position.x - 70f, this._transform.position.y, -1f);
+                this.cameraObject.position = currentPosition;
+            }
         }
         else
         {
@@ -221,6 +247,7 @@ public class HeroController : MonoBehaviour {
 		if (other.gameObject.CompareTag ("enemy")) {
 			Destroy (other.gameObject);
 			this._enemyDeath.Play ();
+            this._playerDeath();
 		}
 
 
@@ -261,8 +288,45 @@ public class HeroController : MonoBehaviour {
 
         if (SceneManager.GetActiveScene().buildIndex == 3)
         {
-            this._spawn(2244, 258, 0);
-            this._spawnRock();
+            if (this._transform.position.x < 701f)
+            {
+                this._spawn(-901, 258, 0);
+                this._spawnRock();
+            }
+            else if (this._transform.position.x > 701f && this._transform.position.x < 2442f)
+            {
+                this._spawn(701, 160, 0);
+                this._spawnRock();
+            }
+            else if (this._transform.position.x < 4525f)
+            {
+                this._spawn(2442, 160, 0);
+                this._spawnRock();
+            }
+
+        }
+        else if (SceneManager.GetActiveScene().buildIndex == 4)
+        {
+            if (this._transform.position.x < 3089f)
+            {
+                this._spawn(597, 232, 0);
+                this._icePlatform();
+            }
+            else if (this._transform.position.x > 3089f && this._transform.position.x < 4944f)
+            {
+                this._spawn(3089, -107, 0);
+                this._icePlatform();
+            }
+            else if (this._transform.position.x > 4944f && this._transform.position.x < 6050f)
+            {
+                this._spawn(4944, -107, 0);
+                this._icePlatform();
+            }
+            else
+            {
+                this._spawn(6030, -107, 0);
+                this._icePlatform();
+            }
         }
         else
         {
@@ -326,6 +390,15 @@ public class HeroController : MonoBehaviour {
 
         GameObject fallingPlatform = GameObject.FindGameObjectWithTag("fallingPlatform");
         fallingPlatform.transform.position = new Vector3(2720f, -7f, 0f);
+    }
+
+    private void _icePlatform()
+    {
+        GameObject fallingiceplatform = GameObject.FindGameObjectWithTag("fallingplatforml3");
+        fallingiceplatform.transform.position = new Vector3(2281f, -202f, 0);
+
+        GameObject fallingiceplatform1 = GameObject.FindGameObjectWithTag("fallingplatforml3_1");
+        fallingiceplatform1.transform.position = new Vector3(2537f, -202f, 0);
     }
 
 	//to get the inital position of float objects

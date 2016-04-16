@@ -49,7 +49,10 @@
      <Compile Include="Assets\_Scripts\HeroController.cs" />
      <Compile Include="Assets\_Scripts\InstructionsController.cs" />
      <Compile Include="Assets\_Scripts\LevelThree\EnemyControllerLvlThree.cs" />
+     <Compile Include="Assets\_Scripts\LevelThree\EnemyShootingAI.cs" />
      <Compile Include="Assets\_Scripts\LevelThree\FireControllerLvlThree.cs" />
+     <Compile Include="Assets\_Scripts\LevelThree\MonsterFireController.cs" />
+     <Compile Include="Assets\_Scripts\LevelThree\MonsterOnHitController.cs" />
      <Compile Include="Assets\_Scripts\LevelThree\PlatformFall.cs" />
      <Compile Include="Assets\_Scripts\LevelThree\ShootingControllerLvlThree.cs" />
      <Compile Include="Assets\_Scripts\LevelTwo\EnemyControllerLvlTwo.cs" />
@@ -59,6 +62,7 @@
      <Compile Include="Assets\_Scripts\LevelTwo\PowerUpController.cs" />
      <Compile Include="Assets\_Scripts\LevelTwo\ShootingController.cs" />
      <Compile Include="Assets\_Scripts\MenuController.cs" />
+     <Compile Include="Assets\_Scripts\PersistantScore.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
