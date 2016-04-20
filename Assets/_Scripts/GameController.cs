@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour {
 	public Text GameoverText;
 	public Text HighScoreText;
 	public Text FinishGameText;
+    public RectTransform GamePanel;
     public Text PromoText;
     public Image LivesIcon;
     public Image CoinIcon;
@@ -87,10 +88,20 @@ public class GameController : MonoBehaviour {
         {
             this.PromoText.enabled = false;
         }
+        if (this.GamePanel != null)
+        {
+            this.GamePanel.gameObject.SetActive(false);
+        }
 	}
 
 	//THIS METHOD IS CALLED WHEN THE PLAYER HAS LOST ALL HIS LIVES
-	private void _endGame(){		
+	private void _endGame(){
+
+        if (this.GamePanel != null)
+        {
+            this.GamePanel.gameObject.SetActive(true);
+        }
+
 		this.HighScoreText.text = "Score : " + this._scoreValue;
 		this.GameoverText.enabled = true;
 		this.ScoreText.enabled = false;
@@ -105,34 +116,48 @@ public class GameController : MonoBehaviour {
 
 	//THIS METHOD IS CALLED WHEN THE PLAYER REACHES THE FINISH POINT
 	public void finishGame(){
-		this.ScoreText.enabled = false;
-		this.LivesText.enabled = false;
-		this.HighScoreText.text = "Score : " + this._scoreValue;
-		this.HighScoreText.enabled = true;
-		this.FinishGameText.enabled = true;
-		this.LevelButton.gameObject.SetActive(true);
-        if (this.PromoText != null)
-        {
-            this.PromoText.enabled = true;
-        }
-        if (this.LivesIcon != null)
-        {
-            this.LivesIcon.enabled = false;
-        }
-        if (this.CoinIcon != null)
-        {
-            this.CoinIcon.enabled = false;
-        }
 
-        this._scoreTrackerScript.ScoreValue = this._scoreValue;
-        this._scoreTrackerScript.LivesValue = this._lifeValues;
-
-		this.heroController.gameObject.SetActive(false);
-		this.heroController.cameraObject.position = new Vector3 (1,1,-10);
-
-        if (SceneManager.GetActiveScene().buildIndex == 3 || SceneManager.GetActiveScene().buildIndex == 2)
+        if (SceneManager.GetActiveScene().buildIndex == 4)
         {
-            this._menuSound.Play();
+            this._scoreTrackerScript.ScoreValue = this._scoreValue;
+            this._scoreTrackerScript.LivesValue = this._lifeValues;
+            SceneManager.LoadScene(5);
+        }
+        else
+        {
+            if (this.GamePanel != null)
+            {
+                this.GamePanel.gameObject.SetActive(true);
+            }
+            this.ScoreText.enabled = false;
+            this.LivesText.enabled = false;
+            this.HighScoreText.text = "Score : " + this._scoreValue;
+            this.HighScoreText.enabled = true;
+            this.FinishGameText.enabled = true;
+            this.LevelButton.gameObject.SetActive(true);
+            if (this.PromoText != null)
+            {
+                this.PromoText.enabled = true;
+            }
+            if (this.LivesIcon != null)
+            {
+                this.LivesIcon.enabled = false;
+            }
+            if (this.CoinIcon != null)
+            {
+                this.CoinIcon.enabled = false;
+            }
+
+            this._scoreTrackerScript.ScoreValue = this._scoreValue;
+            this._scoreTrackerScript.LivesValue = this._lifeValues;
+
+            this.heroController.gameObject.SetActive(false);
+            this.heroController.cameraObject.position = new Vector3(1, 1, -10);
+
+            if (SceneManager.GetActiveScene().buildIndex == 3 || SceneManager.GetActiveScene().buildIndex == 2)
+            {
+                this._menuSound.Play();
+            }
         }
 
 	}

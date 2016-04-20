@@ -230,9 +230,9 @@ public class HeroController : MonoBehaviour {
 
         if (other.gameObject.CompareTag("enemyLevelTwo"))
         {
-            //this.gameController.LivesValue--;
+            this.gameController.LivesValue--;
             this._deathSound.Play();
-            // this._playerDeath();
+            this._playerDeath();
         }
 	}
 
